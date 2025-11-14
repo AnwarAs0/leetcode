@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isValid(String s) {
+        int n = s.length();
+        if ((n & 1) == 1) return false;
+
+        char[] stack = new char[n];
+        int top = -1;
+
+        for (char c : s.toCharArray()) {
+            switch (c) {
+                case '(':
+                case '{':
+                case '[':
+                    stack[++top] = c;
+                    break;
+                case ')':
+                    if (top < 0 || stack[top--] != '(') return false;
+                    break;
+                case '}':
+                    if (top < 0 || stack[top--] != '{') return false;
+                    break;
+                case ']':
+                    if (top < 0 || stack[top--] != '[') return false;
+                    break;
+            }
+        }
+        return top == -1;
+    }
+}
