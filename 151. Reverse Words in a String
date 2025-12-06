@@ -1,0 +1,50 @@
+class Solution {
+    public String reverseWords(String s) {
+        String str = s.trim();
+        String result = str.replaceAll("\\s+", " ");
+        String[] words = result.split(" ");
+
+        StringBuilder reversedString = new StringBuilder();
+        for (int i = words.length - 1; i >= 0; i--) {
+            reversedString.append(words[i]);
+            if (i > 0) { // Add space between words, but not after the last word
+                reversedString.append(" ");
+            }
+        }
+        return reversedString.toString();
+        }
+}
+
+
+
+class Solution {
+    public String reverseWords(String s) {
+        int end = s.length() - 1;
+        StringBuilder result = new StringBuilder();
+
+        while (end >= 0) {
+
+            // Skip spaces
+            while (end >= 0 && s.charAt(end) == ' ') {
+                end--;
+            }
+            if (end < 0) break;
+
+            // Find the start of the word
+            int start = end;
+            while (start >= 0 && s.charAt(start) != ' ') {
+                start--;
+            }
+
+            // Append the word
+            result.append(s.substring(start + 1, end + 1));
+            result.append(' ');
+
+            // Move end pointer left of the word
+            end = start - 1;
+        }
+
+        // Remove final trailing space
+        return result.toString().trim();
+    }
+}
